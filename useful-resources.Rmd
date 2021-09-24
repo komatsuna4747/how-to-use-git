@@ -1,0 +1,18 @@
+# Useful resources
+
+## Git/GitHubの使い方に関するチュートリアル
+経済セミナーの原稿では、Git/GitHubの使い方について必要最小限に述べるにとどめた。Git/GitHubの使い方により慣れたい場合は、以下のMicrosoftによるチュートリアルが詳しい。Microsoft accountを持っていれば、Gitのコマンドの使い方の演習も無料で行うことができる。
+
+- Gitでのバージョンコントロールの概要
+  - https://docs.microsoft.com/ja-jp/learn/paths/github-administration-products/
+
+- GitHub の基礎 - 管理の基本と製品の機能
+  - https://docs.microsoft.com/ja-jp/learn/paths/github-administration-products/
+
+## GitのGUIツールについて
+経済セミナー本誌ではGitをコマンドラインから扱う方法を取り扱った。コマンドライン操作に慣れていない人であれば、上記のチュートリアルでGitの概念を学習したあと、実際の運用でGitのGUIツールを使うのも良いだろう。
+
+Gitを扱うGUIツールの代表例としては、GitHub Desktopがある。一部日本語の翻訳が追いついていない部分もあるが、公式のチュートリアルが充実している。
+
+- GitHub Desktopの使い方
+  - https://docs.github.com/ja/desktop

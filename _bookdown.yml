@@ -1,0 +1,8 @@
+book_filename: "howtogit"
+output_dir: "docs"
+delete_merged_file: true
+rmd_files:
+  - index.Rmd
+  - useful-resources.Rmd
+  - writing-paper.Rmd
+  - branch-strategy.Rmd
