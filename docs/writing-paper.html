@@ -149,11 +149,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2.1" data-path="writing-paper.html"><a href="writing-paper.html#overleaf-の活用"><i class="fa fa-check"></i><b>2.2.1</b> Overleaf の活用</a></li>
 <li class="chapter" data-level="2.2.2" data-path="writing-paper.html"><a href="writing-paper.html#docker-vscode-の活用"><i class="fa fa-check"></i><b>2.2.2</b> Docker + VSCode の活用</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="writing-paper.html"><a href="writing-paper.html#継続的インテグレーションによりgithub-上で自動的にコンパイルする"><i class="fa fa-check"></i><b>2.3</b> 継続的インテグレーションにより、GitHub 上で自動的にコンパイルする</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="writing-paper.html"><a href="writing-paper.html#注意点"><i class="fa fa-check"></i><b>2.3.1</b> 注意点</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="continuous-integration.html"><a href="continuous-integration.html"><i class="fa fa-check"></i><b>3</b> 継続的インテグレーションで、ワークフローを自動化する</a><ul>
+<li class="chapter" data-level="3.1" data-path="continuous-integration.html"><a href="continuous-integration.html#論文スライド用の-tex-ファイルを自動的にコンパイルし最新版が常に見られるようにする"><i class="fa fa-check"></i><b>3.1</b> 論文・スライド用の tex ファイルを自動的にコンパイルし、最新版が常に見られるようにする</a></li>
+<li class="chapter" data-level="3.2" data-path="continuous-integration.html"><a href="continuous-integration.html#分析用のdo-fileを修正したあとコードを回し分析結果を自動的にアップデートする"><i class="fa fa-check"></i><b>3.2</b> 分析用のDo fileを修正したあとコードを回し、分析結果を自動的にアップデートする</a></li>
+<li class="chapter" data-level="3.3" data-path="continuous-integration.html"><a href="continuous-integration.html#作成している-r-のパッケージに修正を加え単体テストを自動的に走らせる"><i class="fa fa-check"></i><b>3.3</b> 作成している R のパッケージに修正を加え、単体テストを自動的に走らせる</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="continuous-integration.html"><a href="continuous-integration.html#注意点"><i class="fa fa-check"></i><b>3.3.1</b> 注意点</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="continuous-integration.html"><a href="continuous-integration.html"><i class="fa fa-check"></i><b>3</b> 継続的インテグレーションで、ワークフローを自動化する</a></li>
 <li class="chapter" data-level="4" data-path="branch-strategy.html"><a href="branch-strategy.html"><i class="fa fa-check"></i><b>4</b> ブランチ戦略</a><ul>
 <li class="chapter" data-level="4.1" data-path="branch-strategy.html"><a href="branch-strategy.html#git-flow"><i class="fa fa-check"></i><b>4.1</b> Git Flow</a><ul>
 <li class="chapter" data-level="4.1.1" data-path="branch-strategy.html"><a href="branch-strategy.html#メインブランチ-main-branch"><i class="fa fa-check"></i><b>4.1.1</b> メインブランチ (main branch)</a></li>
@@ -447,129 +450,8 @@ LaTeX Workshop が見つかるはずなので、それをインストールす�
 </ul>
 <p>設定がうまくいけば、texファイルに変更が加えられるごとにコンパイルが行われ、作成された pdf ファイルを確認することができる。</p>
 <p><img src="images/vscode-view.png" width="1006" /></p>
+
 </div>
-</div>
-</div>
-<div id="継続的インテグレーションによりgithub-上で自動的にコンパイルする" class="section level2">
-<h2><span class="header-section-number">2.3</span> 継続的インテグレーションにより、GitHub 上で自動的にコンパイルする</h2>
-<p>共著者の中には論文をチェックできれば良い人もいるため、そういう人にとっては <code>tex</code> ファイルをプルしてコンパイルする作業が面倒であったりする。
-コンパイルできる人がローカルで pdf を作成し、それをリモートリポジトリにプッシュするのも良いだろうが、プッシュし忘れて、<code>tex</code> ファイルのバージョンと pdf ファイルのバージョンが食い違ったりすることもあり得る。
-手作業による運用は往々にしてミスを生みがちなので、この辺を自動化したい。
-つまり、 <code>tex</code> ファイルだけをプッシュすれば GitHub が勝手にコンパイルしてくれたりしないだろうか。</p>
-<p>それを可能にする機能の1つが、<strong>GitHub Actions</strong> である。GitHub Actions とは、開発者のワークフローを GitHub 上で自動化するためのツールである。</p>
-<p><a href="https://github.com/features/actions" class="uri">https://github.com/features/actions</a></p>
-<p>執筆者がローカルで tex file をコンパイルして、pdf ファイルをアップロードする一連のワークフローを GitHub Actions にお任せしたい。
-このように、ローカルで手動で行っていたワークフローを自動化し、プログラムに変更があるたびに都度ビルド・テストをを行える環境を作ることを、<strong>継続的インテグレーション (Continuous Integration: CI)</strong> と呼ぶ。</p>
-<p>始め方は、リポジトリのルートディレクトリに <code>.github/workflow</code>というディレクトリを作り、その中に <code>yaml</code> ファイルを作成すればよい。
-これは GitHub の Actions からも作成することは可能である。</p>
-<p><img src="images/github-actions.png" width="1383" /></p>
-<p>ひとまず <code>komatsuna4747/gitpractice/.github/workflow</code> に以下のような <code>main.yaml</code>を作成した。
-今回のワークフローの自動化では、<a href="https://github.com/xu-cheng/latex-action">こちら</a>を利用している<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>。</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb13-1"><a href="writing-paper.html#cb13-1"></a><span class="co"># This is a basic workflow to help you get started with Actions</span></span>
-<span id="cb13-2"><a href="writing-paper.html#cb13-2"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Build LaTeX document</span></span>
-<span id="cb13-3"><a href="writing-paper.html#cb13-3"></a></span>
-<span id="cb13-4"><a href="writing-paper.html#cb13-4"></a><span class="co"># Controls when the workflow will run</span></span>
-<span id="cb13-5"><a href="writing-paper.html#cb13-5"></a><span class="fu">on</span><span class="kw">:</span></span>
-<span id="cb13-6"><a href="writing-paper.html#cb13-6"></a><span class="at">  </span><span class="fu">push</span><span class="kw">:</span></span>
-<span id="cb13-7"><a href="writing-paper.html#cb13-7"></a><span class="at">    </span><span class="fu">paths</span><span class="kw">:</span></span>
-<span id="cb13-8"><a href="writing-paper.html#cb13-8"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&#39;papers/report.tex&#39;</span></span>
-<span id="cb13-9"><a href="writing-paper.html#cb13-9"></a></span>
-<span id="cb13-10"><a href="writing-paper.html#cb13-10"></a><span class="fu">jobs</span><span class="kw">:</span></span>
-<span id="cb13-11"><a href="writing-paper.html#cb13-11"></a><span class="at">  </span><span class="fu">build_latex</span><span class="kw">:</span></span>
-<span id="cb13-12"><a href="writing-paper.html#cb13-12"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
-<span id="cb13-13"><a href="writing-paper.html#cb13-13"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
-<span id="cb13-14"><a href="writing-paper.html#cb13-14"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Set up Git repository</span></span>
-<span id="cb13-15"><a href="writing-paper.html#cb13-15"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v2</span></span>
-<span id="cb13-16"><a href="writing-paper.html#cb13-16"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Compile LaTeX document</span></span>
-<span id="cb13-17"><a href="writing-paper.html#cb13-17"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> xu-cheng/latex-action@v2</span></span>
-<span id="cb13-18"><a href="writing-paper.html#cb13-18"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
-<span id="cb13-19"><a href="writing-paper.html#cb13-19"></a><span class="at">          </span><span class="fu">working_directory</span><span class="kw">:</span><span class="at"> papers</span></span>
-<span id="cb13-20"><a href="writing-paper.html#cb13-20"></a><span class="at">          </span><span class="fu">root_file</span><span class="kw">:</span><span class="at"> report.tex</span></span>
-<span id="cb13-21"><a href="writing-paper.html#cb13-21"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Copy PDF file</span></span>
-<span id="cb13-22"><a href="writing-paper.html#cb13-22"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> mkdir docs &amp;&amp; cp papers/*.pdf docs/</span></span>
-<span id="cb13-23"><a href="writing-paper.html#cb13-23"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Deploy pages</span></span>
-<span id="cb13-24"><a href="writing-paper.html#cb13-24"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> peaceiris/actions-gh-pages@v3</span></span>
-<span id="cb13-25"><a href="writing-paper.html#cb13-25"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
-<span id="cb13-26"><a href="writing-paper.html#cb13-26"></a><span class="at">          </span><span class="fu">github_token</span><span class="kw">:</span><span class="at"> ${{ secrets.GITHUB_TOKEN }}</span></span>
-<span id="cb13-27"><a href="writing-paper.html#cb13-27"></a><span class="at">          </span><span class="fu">publish_dir</span><span class="kw">:</span><span class="at"> ./docs</span></span></code></pre></div>
-<p>To do: この詳細を書く。若干微調整している。</p>
-<p>書かれてある内容の詳細は省くが、このファイルを容易することで、変更が加えられた tex ファイルが GitHub のリポジトリにプッシュされるごとに</p>
-<ul>
-<li>tex ファイルがコンパイルされて pdf が作成され</li>
-<li>作成された pdf ファイルが <code>gh-pages</code> というブランチにプッシュされる</li>
-</ul>
-<p>以上を自動的に行ってくれるようになる。したがって pdf ファイルだけを見たい人は、<code>gh-pages</code> の pdf をダウンロードして読めばよいことになる。
-さらに、変更が加えられた tex ファイルがプッシュされるごとに、<code>gh-pages</code> の pdf も更新されるので、tex のファイルのバージョンと pdf のバージョンが常に最新版でリンクするようになるわけである。</p>
-<p>実際にどのように動くのかを見てみよう。</p>
-<p>まず、tex ファイルに以下のような変更を加えてコミットし、プッシュする。</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode diff"><code class="sourceCode diff"><span id="cb14-1"><a href="writing-paper.html#cb14-1"></a>$ git diff</span>
-<span id="cb14-2"><a href="writing-paper.html#cb14-2"></a><span class="kw">diff --git a/papers/report.tex b/papers/report.tex</span></span>
-<span id="cb14-3"><a href="writing-paper.html#cb14-3"></a>index 117cbb2..327440f 100644</span>
-<span id="cb14-4"><a href="writing-paper.html#cb14-4"></a><span class="dt">--- a/papers/report.tex</span></span>
-<span id="cb14-5"><a href="writing-paper.html#cb14-5"></a><span class="dt">+++ b/papers/report.tex</span></span>
-<span id="cb14-6"><a href="writing-paper.html#cb14-6"></a><span class="dt">@@ -17,7 +17,7 @@</span></span>
-<span id="cb14-7"><a href="writing-paper.html#cb14-7"></a> </span>
-<span id="cb14-8"><a href="writing-paper.html#cb14-8"></a> \section{Introduction}</span>
-<span id="cb14-9"><a href="writing-paper.html#cb14-9"></a> </span>
-<span id="cb14-10"><a href="writing-paper.html#cb14-10"></a><span class="st">-\citet{knittel2018working} is a good reference for data management issues in empirical research projects.</span></span>
-<span id="cb14-11"><a href="writing-paper.html#cb14-11"></a><span class="va">+\citet{knittel2018working} is a good reference for empirical research projects.</span></span>
-<span id="cb14-12"><a href="writing-paper.html#cb14-12"></a> </span>
-<span id="cb14-13"><a href="writing-paper.html#cb14-13"></a> \bibliography{report}</span>
-<span id="cb14-14"><a href="writing-paper.html#cb14-14"></a> \bibliographystyle{aer}</span></code></pre></div>
-<pre class="shell"><code>$ git add -u
-
-$ git status 
-On branch feature/check-ci
-Changes to be committed:
-  (use &quot;git restore --staged &lt;file&gt;...&quot; to unstage)
-        modified:   report.tex
-
-$ git commit -m &quot;Make a change&quot;
-[feature/check-ci 482bf95] Make a change
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-$ git status
-On branch feature/check-ci
-nothing to commit, working tree clean
-
-$ git push origin HEAD
-Enumerating objects: 7, done.
-Counting objects: 100% (7/7), done.
-Delta compression using up to 16 threads
-Compressing objects: 100% (4/4), done.
-Writing objects: 100% (4/4), 345 bytes | 345.00 KiB/s, done.
-Total 4 (delta 3), reused 0 (delta 0)
-remote: Resolving deltas: 100% (3/3), completed with 3 local objects.
-remote: 
-remote: Create a pull request for &#39;feature/check-ci&#39; on GitHub by visiting:
-remote:      https://github.com/komatsuna4747/gitpractice/pull/new/feature/check-ci
-remote: 
-To github.com:komatsuna4747/gitpractice.git
- * [new branch]      HEAD -&gt; feature/check-ci</code></pre>
-<p>変更が加えられた tex ファイルがプッシュされたので、以下のようにコンパイルをするための準備、およびコンパイルが始まった。</p>
-<p><img src="images/actions-in-progress.png" width="1656" /></p>
-<p>しばらく待つと、全ての作業が完了した。どこかで失敗が起こった場合、登録したメールアドレスの方に GitHub Actions のワークフローが失敗した通知が届く。</p>
-<p><img src="images/actions-completed.png" width="1666" /></p>
-<p><code>gh-pages</code> ブランチの pdf ファイルを見ると、確かに変更が反映された pdf がアップロードされていることがわかる。</p>
-<p><img src="images/paper-latest.png" width="1285" /></p>
-<p>過去の pdf をみたい場合は、そのファイルの history からたどることができる。</p>
-<p>tex のソースファイルを見たくない共著者にはこの pdf を共有して、コメントをもらえばよい。</p>
-<p>この GitHub Actions を用いた継続的インテグレーションは、tex ファイルのコンパイルだけでなく、分析コードのビルド・単体テスト、分析コードの実行の自動化にも応用可能である。
-このあたりは別途書いてみたい。</p>
-<div id="注意点" class="section level3">
-<h3><span class="header-section-number">2.3.1</span> 注意点</h3>
-<p>GitHub Actions は、</p>
-<ul>
-<li>パブリックリポジトリだと無料</li>
-<li>プライベートリポジトリだと、以下の無料枠を使い切ったあとは従量課金制である
-<ul>
-<li>Free アカウントだと 2000分/月まで無料</li>
-<li>Pro アカウントだと 3000分/月まで無料</li>
-</ul></li>
-</ul>
-<p>なので GitHub Actions の使い方を練習したい場合は、念の為パブリックリポジトリで行うほうが良いだろう。</p>
-<p>また上記の tex ファイルのコンパイルの自動化も、1回あたり数分で終わるため、よほど何回も変更が加えられた tex ファイルをプッシュしない限り、月の無料枠を使い切ることは考えにくい。</p>
-
 </div>
 </div>
 </div>
@@ -582,7 +464,6 @@ Wordファイルなどの<strong>バイナリファイル (binary file)</strong>
 は、リモートリポジトリ <code>origin</code> をクローンした時にダウンロードされるコミットの位置を表す。
 通常 <code>origin/master</code> と同じ位置を指す。<a href="writing-paper.html#fnref2" class="footnote-back">↩︎</a></p></li>
 <li id="fn3"><p>Setting により、default branch は変更することが可能である。<a href="writing-paper.html#fnref3" class="footnote-back">↩︎</a></p></li>
-<li id="fn4"><p>本来は、ローカルで Docker を用いた LaTeX 環境と同じもので GitHub 上でもコンパイルできるようにした方が理想である<a href="writing-paper.html#fnref4" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
