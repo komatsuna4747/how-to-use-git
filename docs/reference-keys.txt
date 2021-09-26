@@ -22,3 +22,6 @@ git-flow
 hotfixブランチ-hotfix-branch
 git-flow-のメリット
 研究プロジェクトにおける-git-flow-の活用
+vscode-で拡張機能latex-workshopをインストールする
+latex-が使える-docker-イメージをプルする
+settings.json-を編集する

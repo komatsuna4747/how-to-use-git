@@ -274,11 +274,111 @@ Docker の詳細は経済セミナーの第2回目の連載に譲るが、LaTeX 
 Visual Studio Code、略して VSCode はエディタの1つであり、数多くの拡張機能によって好みの開発環境を容易に構築することが可能である。
 
 VSCode と Docker を組み合わせて LaTeX の環境構築を行う方法は、検索すれば多数ヒットする。
+それらを参考にして、ここでは VSCode + Docker + LaTeX の1つの方法を紹介する。
+Docker のインストール、VSCode のダウンロードは省略する (To do: 将来追記しておく)。
 
-- 爆速で日本語LaTeX執筆環境を用意する
-  - https://korosuke613.hatenablog.com/entry/2019/06/24/171246
+[To do: Docker + LaTeX の概念図を作って入れる]
 
-To do: この続きを書く。
+#### VSCode で拡張機能「LaTeX Workshop」をインストールする。
+
+LaTeX Workshop は、VSCode で LaTeX を扱う上で便利な拡張機能である。
+
+VSCode の左側にあるブロックのようなアイコンをクリックし、LaTeX Workshop と検索窓に入れる。
+LaTeX Workshop が見つかるはずなので、それをインストールする。
+
+```{r, echo=FALSE}
+knitr::include_graphics("images/vscode-latex-workshop.png")
+```
+
+#### LaTeX が使える Docker イメージをプルする
+
+LaTeX Workshop は、LaTeX の環境構築が終わっていることを前提とした拡張機能であるため、LaTeX の環境構築を行う必要がある。
+そこで、LaTeX が使えるコンテナを起動する Docker image を手元に準備する。
+
+Dockerfile を書いて from scratch に作成してもよいが、こうしたイメージはすでに世の偉人たちが作成し使えるようにしてある。
+ここでは `ghcr.io/xu-cheng/texlive-full:latest` という Docker image を pull して使用する。日本語も使用したい場合は、`paperist/alpine-texlive-ja` が良いだろう。
+
+```{shell}
+docker pull ghcr.io/xu-cheng/texlive-full:latest
+```
+
+
+#### settings.json を編集する
+
+上で pull した Docker image からコンテナを立ち上げ、そのコンテナの中でコンパイルするように、LaTeX Workshop に指示したい。
+そこで VSCode の settings を変更する。
+
+VSCode の左下の歯車のアイコンを選択し、`Settings` を選択する。
+
+```{r, echo=FALSE}
+knitr::include_graphics("images/vscode-geer.png")
+```
+
+そして右上に現れる書類のようなアイコンを選択し、`settings.json` ファイルを開く。
+
+```{r, echo=FALSE}
+knitr::include_graphics("images/vscode-json.png")
+```
+
+`settings.json` に、以下を書き加えよう。
+
+
+```{json}
+{
+  "latex-workshop.latex.clean.fileTypes": [
+    "*.aux", "*.bbl", "*.blg", "*.idx", "*.ind", "*.lof", "*.lot", "*.out", "*.toc", "*.acn", "*.acr", "*.alg", "*.glg", "*.glo", "*.gls", "*.ist", "*.fls", "*.log", "*.fdb_latexmk", "*.synctex.gz",
+    // for Beamer files
+    "_minted*", "*.nav", "*.snm", "*.vrb",
+  ],
+  
+  "latex-workshop.latex.autoClean.run": "onBuilt",
+  
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "compile",
+      "tools": [
+        "tex2pdf"
+      ]
+    }
+  ],
+  
+  "latex-workshop.latex.tools": [
+    {
+      "name": "tex2pdf",
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-v",
+        "%DIR%:/usr/workdir",
+        "-w",
+        "/usr/workdir",
+        "ghcr.io/xu-cheng/texlive-full",
+        "latexmk",
+        "%DOCFILE_EXT%",
+        "-pdf"
+      ]
+    }
+  ],
+  
+  "latex-workshop.latex.autoBuild.run": "onFileChange",
+  
+  "latex-workshop.view.pdf.viewer": "tab"
+}
+```
+
+
+- `latex-workshop.latex.clean.fileTypes` は、コンパイルするときに生成される不必要なファイルのうち、削除したいものを指定している。そのアクションがコンパイルされるときに実行されるよう指示しているのが `"latex-workshop.latex.autoClean.run": "onBuilt"` である。
+- 使用するコンパイラーを `"latex-workshop.latex.recipes"` で書く。その定義を下の `"latex-workshop.latex.tools"` に書く。
+- Docker に関してのコマンドの説明は省くが、コンパイルするときに `ghcr.io/xu-cheng/texlive-full` からコンテナを立ち上げ、`latexmk` コマンドを使い、current directory にある tex ファイルをコンパイルする。コンパイルが終わったら、コンテナを壊す。
+- `"latex-workshop.latex.autoBuild.run": "onFileChange"` は、tex ファイルに変更が加えられるごとに、コンパイルが行われるよう設定である。
+
+
+設定がうまくいけば、texファイルに変更が加えられるごとにコンパイルが行われ、作成された pdf ファイルを確認することができる。
+
+```{r, echo=FALSE}
+knitr::include_graphics("images/vscode-view.png")
+```
 
 ## 継続的インテグレーションにより、GitHub 上で自動的にコンパイルする
 
