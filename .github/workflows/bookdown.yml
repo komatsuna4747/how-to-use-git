@@ -15,9 +15,6 @@ jobs:
       - uses: actions/checkout@v2
 
       - uses: r-lib/actions/setup-pandoc@v1
-          
-      - name: Install rmarkdown
-        run: Rscript -e "install.packages('rmarkdown')"
 
       - name: Build site
         run: Rscript -e "rmarkdown::render_site(encoding = 'UTF-8')"
