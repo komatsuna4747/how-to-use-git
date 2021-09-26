@@ -25,3 +25,4 @@ git-flow-のメリット
 vscode-で拡張機能latex-workshopをインストールする
 latex-が使える-docker-イメージをプルする
 settings.json-を編集する
+継続的インテグレーションでワークフローを自動化する

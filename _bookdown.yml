@@ -5,4 +5,5 @@ rmd_files:
   - index.Rmd
   - useful-resources.Rmd
   - writing-paper.Rmd
+  - continuous-integration.Rmd
   - branch-strategy.Rmd
