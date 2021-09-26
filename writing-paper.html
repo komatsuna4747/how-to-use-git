@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Git/GitHubを用いて論文を執筆する | Git/GitHubによるプロジェクト管理</title>
+  <meta name="description" content="2 Git/GitHubを用いて論文を執筆する | Git/GitHubによるプロジェクト管理" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Git/GitHubを用いて論文を執筆する | Git/GitHubによるプロジェクト管理" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Git/GitHubを用いて論文を執筆する | Git/GitHubによるプロジェクト管理" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="useful-resources.html"/>
+<link rel="next" href="continuous-integration.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>はじめに</a></li>
+<li class="chapter" data-level="1" data-path="useful-resources.html"><a href="useful-resources.html"><i class="fa fa-check"></i><b>1</b> Useful resources</a><ul>
+<li class="chapter" data-level="1.1" data-path="useful-resources.html"><a href="useful-resources.html#gitgithubの使い方に関するチュートリアル"><i class="fa fa-check"></i><b>1.1</b> Git/GitHubの使い方に関するチュートリアル</a></li>
+<li class="chapter" data-level="1.2" data-path="useful-resources.html"><a href="useful-resources.html#gitのguiツールについて"><i class="fa fa-check"></i><b>1.2</b> GitのGUIツールについて</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="writing-paper.html"><a href="writing-paper.html"><i class="fa fa-check"></i><b>2</b> Git/GitHubを用いて論文を執筆する</a><ul>
+<li class="chapter" data-level="2.1" data-path="writing-paper.html"><a href="writing-paper.html#論文作業のワークフロー"><i class="fa fa-check"></i><b>2.1</b> 論文作業のワークフロー</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="writing-paper.html"><a href="writing-paper.html#研究テーマ単位でリポジトリを作成する"><i class="fa fa-check"></i><b>2.1.1</b> 研究テーマ単位でリポジトリを作成する</a></li>
+<li class="chapter" data-level="2.1.2" data-path="writing-paper.html"><a href="writing-paper.html#執筆上の課題を明確化しissue-を立てる"><i class="fa fa-check"></i><b>2.1.2</b> 執筆上の課題を明確化し、Issue を立てる</a></li>
+<li class="chapter" data-level="2.1.3" data-path="writing-paper.html"><a href="writing-paper.html#issue-を解決するためにブランチを切りその上で執筆を進める"><i class="fa fa-check"></i><b>2.1.3</b> Issue を解決するためにブランチを切り、その上で執筆を進める</a></li>
+<li class="chapter" data-level="2.1.4" data-path="writing-paper.html"><a href="writing-paper.html#作業を適宜区切りコミットする各コミットがどの-issue-に対応したものかをコミットメッセージに言及しておく"><i class="fa fa-check"></i><b>2.1.4</b> 作業を適宜区切り、コミットする。各コミットがどの Issue に対応したものかを、コミットメッセージに言及しておく</a></li>
+<li class="chapter" data-level="2.1.5" data-path="writing-paper.html"><a href="writing-paper.html#作業が完了したら-pull-request-を作成し共著者の確認を得るpull-request-のマージをもってissue-への対応を完了する"><i class="fa fa-check"></i><b>2.1.5</b> 作業が完了したら pull request を作成し、共著者の確認を得る。pull request のマージをもって、Issue への対応を完了する</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="writing-paper.html"><a href="writing-paper.html#latex-の作業環境の整備"><i class="fa fa-check"></i><b>2.2</b> LaTeX の作業環境の整備</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="writing-paper.html"><a href="writing-paper.html#overleaf-の活用"><i class="fa fa-check"></i><b>2.2.1</b> Overleaf の活用</a></li>
+<li class="chapter" data-level="2.2.2" data-path="writing-paper.html"><a href="writing-paper.html#docker-vscode-の活用"><i class="fa fa-check"></i><b>2.2.2</b> Docker + VSCode の活用</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="continuous-integration.html"><a href="continuous-integration.html"><i class="fa fa-check"></i><b>3</b> 継続的インテグレーションで、ワークフローを自動化する</a><ul>
+<li class="chapter" data-level="3.1" data-path="continuous-integration.html"><a href="continuous-integration.html#論文スライド用の-tex-ファイルを自動的にコンパイルし最新版が常に見られるようにする"><i class="fa fa-check"></i><b>3.1</b> 論文・スライド用の tex ファイルを自動的にコンパイルし、最新版が常に見られるようにする</a></li>
+<li class="chapter" data-level="3.2" data-path="continuous-integration.html"><a href="continuous-integration.html#分析用のdo-fileを修正したあとコードを回し分析結果を自動的にアップデートする"><i class="fa fa-check"></i><b>3.2</b> 分析用のDo fileを修正したあとコードを回し、分析結果を自動的にアップデートする</a></li>
+<li class="chapter" data-level="3.3" data-path="continuous-integration.html"><a href="continuous-integration.html#作成している-r-のパッケージに修正を加え単体テストを自動的に走らせる"><i class="fa fa-check"></i><b>3.3</b> 作成している R のパッケージに修正を加え、単体テストを自動的に走らせる</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="continuous-integration.html"><a href="continuous-integration.html#注意点"><i class="fa fa-check"></i><b>3.3.1</b> 注意点</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="branch-strategy.html"><a href="branch-strategy.html"><i class="fa fa-check"></i><b>4</b> ブランチ戦略</a><ul>
+<li class="chapter" data-level="4.1" data-path="branch-strategy.html"><a href="branch-strategy.html#git-flow"><i class="fa fa-check"></i><b>4.1</b> Git Flow</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="branch-strategy.html"><a href="branch-strategy.html#メインブランチ-main-branch"><i class="fa fa-check"></i><b>4.1.1</b> メインブランチ (main branch)</a></li>
+<li class="chapter" data-level="4.1.2" data-path="branch-strategy.html"><a href="branch-strategy.html#開発ブランチ-development-branch"><i class="fa fa-check"></i><b>4.1.2</b> 開発ブランチ (development branch)</a></li>
+<li class="chapter" data-level="4.1.3" data-path="branch-strategy.html"><a href="branch-strategy.html#機能ブランチ-feature-branch"><i class="fa fa-check"></i><b>4.1.3</b> 機能ブランチ (feature branch)</a></li>
+<li class="chapter" data-level="4.1.4" data-path="branch-strategy.html"><a href="branch-strategy.html#リリースブランチ-release-branch"><i class="fa fa-check"></i><b>4.1.4</b> リリースブランチ (release branch)</a></li>
+<li class="chapter" data-level="4.1.5" data-path="branch-strategy.html"><a href="branch-strategy.html#hotfixブランチ-hotfix-branch"><i class="fa fa-check"></i><b>4.1.5</b> Hotfixブランチ (hotfix branch)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="branch-strategy.html"><a href="branch-strategy.html#git-flow-のメリット"><i class="fa fa-check"></i><b>4.2</b> Git Flow のメリット</a></li>
+<li class="chapter" data-level="4.3" data-path="branch-strategy.html"><a href="branch-strategy.html#研究プロジェクトにおける-git-flow-の活用"><i class="fa fa-check"></i><b>4.3</b> 研究プロジェクトにおける git-flow の活用？</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Git/GitHubによるプロジェクト管理</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="gitgithubを用いて論文を執筆する" class="section level1">
+<h1><span class="header-section-number">2</span> Git/GitHubを用いて論文を執筆する</h1>
+<p>経済セミナー本稿では分析用のコード作成を例として、Issueの作成、コミット、プッシュ、プルリクエストの作成、ブランチのマージ、以上の一連の作業過程を概観した。</p>
+<p>このワークフローは分析用のコードの管理のみならず、共同で論文を執筆する場合にも有用である。特に LaTeX を用いて論文を執筆する際はソースコードがテキストファイルであるので、Git での管理に向いている<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>。</p>
+<p>ここでは Git/GitHub を用いた、LaTeX による論文執筆の一例を紹介する。
+本章は<a href="https://www8281uo.sakura.ne.jp/blog/?p=666">こちら</a>の記事を大いに参考にしている。
+使用するGitHubのリポジトリは<a href="https://github.com/komatsuna4747/gitpractice">こちら</a>。</p>
+<div id="論文作業のワークフロー" class="section level2">
+<h2><span class="header-section-number">2.1</span> 論文作業のワークフロー</h2>
+<p>基本的なワークフローは、経済セミナー本誌で紹介したものと変わらない。</p>
+<ol style="list-style-type: decimal">
+<li>研究テーマ単位でリポジトリを作成する。</li>
+<li>執筆上の課題を明確化し、Issue を立てる。</li>
+<li>Issue を解決するためにブランチを切り、その上で執筆を進める。</li>
+<li>作業を適宜区切り、コミットする。各コミットがどの Issue に対応したものかを、コミットメッセージに言及しておく。</li>
+<li>作業が完了したら pull request を作成し、共著者の確認を得る。pull request のマージをもって、Issue への対応を完了する。</li>
+</ol>
+<p>このワークフローは、査読対応時も同様に適用できる。</p>
+<div id="研究テーマ単位でリポジトリを作成する" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> 研究テーマ単位でリポジトリを作成する</h3>
+<p>各研究プロジェクト毎にリポジトリを作成し、その中で論文を管理する用のディレクトリ、例えば <code>papers</code> のようなものを準備しておく。
+論文執筆に使う tex ファイルをこの中に保存しておき、そのファイルに変更を加えていく。</p>
+</div>
+<div id="執筆上の課題を明確化しissue-を立てる" class="section level3">
+<h3><span class="header-section-number">2.1.2</span> 執筆上の課題を明確化し、Issue を立てる</h3>
+<p>執筆上の課題を Issue に立て、そこで共著者間で議論を行い、方針を整理する。</p>
+<p><img src="images/issue.png" /><!-- --></p>
+<p>各 Issue にはラベルを付けることができる。
+例えば Reviewer #1 のあるコメントに対応する Issue を立てるときは、そのコメント内容を Issue にコピーアンドペーストする。
+そして <code>Reviewer #1</code> のようなラベルを作成し、そのラベルをつけておく。
+ラベルをふっておくことで、後にフィルタリングを行うことが容易になる。</p>
+</div>
+<div id="issue-を解決するためにブランチを切りその上で執筆を進める" class="section level3">
+<h3><span class="header-section-number">2.1.3</span> Issue を解決するためにブランチを切り、その上で執筆を進める</h3>
+<p>ブランチを切る前に、まず現在の状態 (どのブランチにいるのかを含む) を<code>git status</code>で確認しておく習慣をつけておこう。</p>
+<pre class="shell"><code>$ git status
+On branch main
+Your branch is up to date with &#39;origin/main&#39;.
+
+nothing to commit, working tree clean</code></pre>
+<p>以下のようにmainからブランチを切り、そのブランチ上で作業を進める。</p>
+<pre class="shell"><code>$ git checkout -b feature/cite-ref
+Switched to a new branch &#39;feature/cite-ref&#39;</code></pre>
+</div>
+<div id="作業を適宜区切りコミットする各コミットがどの-issue-に対応したものかをコミットメッセージに言及しておく" class="section level3">
+<h3><span class="header-section-number">2.1.4</span> 作業を適宜区切り、コミットする。各コミットがどの Issue に対応したものかを、コミットメッセージに言及しておく</h3>
+<p>参考文献情報を管理するファイル <code>report.tex</code> を作成し、本文で Issue で言及した文献を引用した。ここで <code>git status</code> で現在の状態を確認する。</p>
+<pre class="shell"><code>$ git status
+On branch feature/cite-ref
+Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git restore &lt;file&gt;...&quot; to discard changes in working directory)
+        modified:   report.tex
+
+Untracked files:
+  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+        report.bib
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)</code></pre>
+<p><code>report.tex</code> に変更が加えられたこと、<code>report.bib</code> が新しく作成されたファイルでトラックされていないことが確認できる。</p>
+<p><code>git diff</code>を行うと、変更が加えられたファイル (ここでは <code>report.tex</code>) の変更の差分を確認できる。</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode diff"><code class="sourceCode diff"><span id="cb4-1"><a href="writing-paper.html#cb4-1"></a>$ git diff</span>
+<span id="cb4-2"><a href="writing-paper.html#cb4-2"></a><span class="kw">diff --git a/papers/report.tex b/papers/report.tex</span></span>
+<span id="cb4-3"><a href="writing-paper.html#cb4-3"></a>index 33bb60f..4403028 100644</span>
+<span id="cb4-4"><a href="writing-paper.html#cb4-4"></a><span class="dt">--- a/papers/report.tex</span></span>
+<span id="cb4-5"><a href="writing-paper.html#cb4-5"></a><span class="dt">+++ b/papers/report.tex</span></span>
+<span id="cb4-6"><a href="writing-paper.html#cb4-6"></a><span class="dt">@@ -9,12 +9,17 @@</span></span>
+<span id="cb4-7"><a href="writing-paper.html#cb4-7"></a> \usepackage{here}</span>
+<span id="cb4-8"><a href="writing-paper.html#cb4-8"></a> \usepackage{url}</span>
+<span id="cb4-9"><a href="writing-paper.html#cb4-9"></a> \usepackage{listings}</span>
+<span id="cb4-10"><a href="writing-paper.html#cb4-10"></a><span class="va">+\usepackage{natbib}</span></span>
+<span id="cb4-11"><a href="writing-paper.html#cb4-11"></a> </span>
+<span id="cb4-12"><a href="writing-paper.html#cb4-12"></a> \begin{document}</span>
+<span id="cb4-13"><a href="writing-paper.html#cb4-13"></a><span class="va">+</span></span>
+<span id="cb4-14"><a href="writing-paper.html#cb4-14"></a> \maketitle</span>
+<span id="cb4-15"><a href="writing-paper.html#cb4-15"></a> </span>
+<span id="cb4-16"><a href="writing-paper.html#cb4-16"></a> \section{Introduction}</span>
+<span id="cb4-17"><a href="writing-paper.html#cb4-17"></a> </span>
+<span id="cb4-18"><a href="writing-paper.html#cb4-18"></a><span class="st">-This is a test.</span></span>
+<span id="cb4-19"><a href="writing-paper.html#cb4-19"></a><span class="va">+\citet{knittel2018working} is a good reference for data management issues in empirical research projects.</span></span>
+<span id="cb4-20"><a href="writing-paper.html#cb4-20"></a><span class="va">+</span></span>
+<span id="cb4-21"><a href="writing-paper.html#cb4-21"></a><span class="va">+\bibliography{report}</span></span>
+<span id="cb4-22"><a href="writing-paper.html#cb4-22"></a><span class="va">+\bibliographystyle{aer}</span></span>
+<span id="cb4-23"><a href="writing-paper.html#cb4-23"></a> </span>
+<span id="cb4-24"><a href="writing-paper.html#cb4-24"></a><span class="st">-\end{document}</span></span>
+<span id="cb4-25"><a href="writing-paper.html#cb4-25"></a><span class="va">+\end{document}</span></span>
+<span id="cb4-26"><a href="writing-paper.html#cb4-26"></a>\ No newline at end of file</span></code></pre></div>
+<p>ステージングされて以内全てのファイルをステージングさせるときは <code>git add -u</code> で行える。
+今回はトラックされていない <code>report.bib</code> も加えたいので、<code>git add report.tex report.bib</code> とステージングさせるファイル名を指定しておく。
+ステージングが終わったら、いつものように <code>git status</code> で確認しておく。</p>
+<pre class="shell"><code>$ git add report.tex report.bib
+$ git status
+On branch feature/cite-ref
+Changes to be committed:
+  (use &quot;git restore --staged &lt;file&gt;...&quot; to unstage)
+        new file:   report.bib
+        modified:   report.tex</code></pre>
+<p>2つのファイルが無事ステージングされたことが確認できた。この状態でコミットすると、この2つのファイルの現在の状況が記録される。</p>
+<p>それでは、この状態でコミットを行う。コミットメッセージ内で Issue の番号を入れておくと、プッシュしたときにそのコミットが Issue と紐付けられる。
+こうすることで、どのコミットによって Issue に関連した変更を加えたのかの追跡が容易になる。</p>
+<p>今取り組んでいる Issue の番号は <code>#4</code> であるから、この番号をコミットメッセージに含めておく。</p>
+<pre class="shell"><code>$ git commit -m &quot;Cite Knittel and Metaxoglou (2018) #4&quot;
+[feature/cite-ref 681c5a4] Cite Knittel and Metaxoglou (2018) #4
+ 2 files changed, 16 insertions(+), 2 deletions(-)
+ create mode 100644 papers/report.bib</code></pre>
+</div>
+<div id="作業が完了したら-pull-request-を作成し共著者の確認を得るpull-request-のマージをもってissue-への対応を完了する" class="section level3">
+<h3><span class="header-section-number">2.1.5</span> 作業が完了したら pull request を作成し、共著者の確認を得る。pull request のマージをもって、Issue への対応を完了する</h3>
+<p>ファイルの変更とコミットを繰り返して Issue が解決できたら、pull request を作成して共著者の確認をもらう。</p>
+<p>一度、これまでのコミット履歴を確認しよう。</p>
+<p>これまでローカルリポジトリで加えた変更が、まだリモートリポジトリに反映されていない。</p>
+<pre class="shell"><code>$ git log -2 --oneline    
+681c5a4 (HEAD -&gt; feature/cite-ref) Cite Knittel and Metaxoglou (2018) #4
+12fa052 (origin/main, origin/HEAD, main) Prepare a docker-latex environment on VSCode</code></pre>
+<p><code>HEAD -&gt; feature/cite-ref</code> は、現在ローカルで使用しているブランチが <code>feature/cite-ref</code> であり、その先頭を表している。リモートリポジトリには、<code>feature/cite-ref</code> ブランチがまだ作成されていない。</p>
+<p>そこで、これまでローカルリポジトリで加えた変更をリモートリポジトリにプッシュして反映させる。</p>
+<pre class="shell"><code>$ git push origin feature/cite-ref
+Enumerating objects: 8, done.
+Counting objects: 100% (8/8), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 796 bytes | 796.00 KiB/s, done.
+Total 5 (delta 2), reused 0 (delta 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+remote: 
+remote: Create a pull request for &#39;feature/cite-ref&#39; on GitHub by visiting:
+remote:      https://github.com/komatsuna4747/gitpractice/pull/new/feature/cite-ref
+remote: 
+To github.com:komatsuna4747/gitpractice.git
+ * [new branch]      feature/cite-ref -&gt; feature/cite-ref</code></pre>
+<p>リモートリポジトリに <code>feature/cite-ref</code> が新しく作られたことがわかる<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>。</p>
+<p>なお現在いるブランチをリモートにプッシュする際は、ブランチ名を入力する必要はなく、<code>HEAD</code>のみで十分である。</p>
+<pre class="shell"><code>$ git push origin HEAD</code></pre>
+<p>もう一度ログを確認してみる。</p>
+<pre class="shell"><code>$ git log -2 --oneline            
+681c5a4 (HEAD -&gt; feature/cite-ref, origin/feature/cite-ref) Cite Knittel and Metaxoglou (2018) #4
+12fa052 (origin/main, origin/HEAD, main) Prepare a docker-latex environment on VSCode</code></pre>
+<p><code>origin</code> とはリモートリポジトリ (GitHub) のことを指すのであったから、<code>feature/cite-ref</code> ブランチのリモートリポジトリの先頭は <code>origin/feature/cite-ref</code> である。
+したがって、ローカルとリモートの <code>feature/cite-ref</code> の先頭が同じ位置にいることがわかる。</p>
+<p>さて、変更がリモートに反映されたので、GitHubから pull request を作成する。</p>
+<p><img src="images/pull-request.png" /><!-- --></p>
+<p>pull request の説明欄に、対応する Issue の番号を書き、<code>Fixed</code>、<code>Closed</code> などを書いておくと、この pull request がマージされたときに自動的に参照された Issue もクローズされる。</p>
+<p>レビューする側は、加えられた変更に対してコメント、変更の提案を行うことができる。レビューを依頼した側は、提案を受け入れて変更しコミットすること (Commit suggestion) もできる。
+このあたりは、Word でコメントしたり変更を加えたりするのと似ているが、Word と比較するとコメントのやり取りや変更の過程をより詳しく記録しておくことが可能である。</p>
+<p><img src="images/suggestion.png" /><!-- --></p>
+<p>レビューが終わり、無事承認されたら、pull requestをマージして、Issue への対応を終了とする。</p>
+</div>
+</div>
+<div id="latex-の作業環境の整備" class="section level2">
+<h2><span class="header-section-number">2.2</span> LaTeX の作業環境の整備</h2>
+<p>これまでLaTeXによる作業環境がすでに整っていることを前提として話をしていた。
+しかし LaTeX の環境構築はそれなりに面倒である。
+特に共同で論文を書くときは、各人のパソコンに LaTeX 環境を構築する必要があること、ある人のパソコンでうまくいく処理が他の人のパソコンではうまくいかないことなどハードルも高い。</p>
+<p>LaTeX の環境構築の努力を必要最小限に抑えられる、2つの方法を紹介する。</p>
+<div id="overleaf-の活用" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Overleaf の活用</h3>
+<p>Overleaf とは、オンラインの共同 LaTeX エディタである。執筆が全てオンラインで完結するので、ユーザー登録さえしてしまえばLaTeX に関する環境構築を手元で行う必要はない。</p>
+<p><a href="https://ja.overleaf.com/" class="uri">https://ja.overleaf.com/</a></p>
+<p>環境構築が必要ないことに加え、</p>
+<ul>
+<li>共著者が同時に編集を加えることができる</li>
+<li>Word のようにコメントや修正を加えることができる</li>
+<li>Git や GitHub と連携することができる (GitHub との連携は有料)</li>
+</ul>
+<p>などの機能があり、便利である。</p>
+<p>Overleaf と GitHub の連携では、Overleaf または GitHub 上で加えられた変更をそれぞれ push/pull することができる。
+この場合、GitHub で対応するブランチは default branch であり、通常これは main branch である<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>。</p>
+<p><img src="images/github-overleaf-pushpull.png" /><!-- --></p>
+<p>Using Git and GitHub (公式のドキュメント)</p>
+<ul>
+<li><a href="https://www.overleaf.com/learn/how-to/Using_Git_and_GitHub" class="uri">https://www.overleaf.com/learn/how-to/Using_Git_and_GitHub</a></li>
+</ul>
+<p>その便利さの一方、Overleaf ではブランチを切って各人が別に執筆を進めるという機能が現時点では存在しない。したがって Overleaf のみで無秩序に執筆を続けていくと、コメントや修正が込み入ってくると、誰のコメントにいつ対応したか、ある修正がいつ行われたかがプロジェクトが長期化するにつれて曖昧になってくる。
+Overleaf を用いて共同で執筆を行う場合、上記の問題をどう解決するかは検討の余地がある。</p>
+<p>Git/GitHub を用いた論文執筆のメリットは、こうしたコメント・修正を Issue・コミット・pull request を通じて記録できることにある。</p>
+</div>
+<div id="docker-vscode-の活用" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> Docker + VSCode の活用</h3>
+<p>LaTeX を用いた執筆の鬼門は、その環境構築にある。
+その環境構築の問題を <strong>Docker</strong> によって解決しようというのが2つ目のアプローチである。</p>
+<p>Docker の詳細は経済セミナーの第2回目の連載に譲るが、LaTeX が使える環境が整った <strong>コンテナ (container)</strong> という仮想環境を作成し、その中でコンパイルするという方法である。
+この Docker を使った利点は、</p>
+<ul>
+<li>同じ LaTeX 環境を複数人が容易に構築することができる</li>
+<li>自分のローカル環境を汚さずに、LaTeX の執筆環境を作成することができる。必要がなくなれば消すことも容易である。</li>
+</ul>
+<p>などが挙げられる。</p>
+<p>Visual Studio Code、略して VSCode はエディタの1つであり、数多くの拡張機能によって好みの開発環境を容易に構築することが可能である。</p>
+<p>VSCode と Docker を組み合わせて LaTeX の環境構築を行う方法は、検索すれば多数ヒットする。
+それらを参考にして、ここでは VSCode + Docker + LaTeX の1つの方法を紹介する。
+Docker のインストール、VSCode のダウンロードは省略する (To do: 将来追記しておく)。</p>
+<p>[To do: Docker + LaTeX の概念図を作って入れる]</p>
+<div id="vscode-で拡張機能latex-workshopをインストールする" class="section level4">
+<h4><span class="header-section-number">2.2.2.1</span> VSCode で拡張機能「LaTeX Workshop」をインストールする。</h4>
+<p>LaTeX Workshop は、VSCode で LaTeX を扱う上で便利な拡張機能である。</p>
+<p>VSCode の左側にあるブロックのようなアイコンをクリックし、LaTeX Workshop と検索窓に入れる。
+LaTeX Workshop が見つかるはずなので、それをインストールする。</p>
+<p><img src="images/vscode-latex-workshop.png" /><!-- --></p>
+</div>
+<div id="latex-が使える-docker-イメージをプルする" class="section level4">
+<h4><span class="header-section-number">2.2.2.2</span> LaTeX が使える Docker イメージをプルする</h4>
+<p>LaTeX Workshop は、LaTeX の環境構築が終わっていることを前提とした拡張機能であるため、LaTeX の環境構築を行う必要がある。
+そこで、LaTeX が使えるコンテナを起動する Docker image を手元に準備する。</p>
+<p>Dockerfile を書いて from scratch に作成してもよいが、こうしたイメージはすでに世の偉人たちが作成し使えるようにしてある。
+ここでは <code>ghcr.io/xu-cheng/texlive-full:latest</code> という Docker image を pull して使用する。日本語も使用したい場合は、<code>paperist/alpine-texlive-ja</code> が良いだろう。</p>
+<pre class="shell"><code>docker pull ghcr.io/xu-cheng/texlive-full:latest</code></pre>
+</div>
+<div id="settings.json-を編集する" class="section level4">
+<h4><span class="header-section-number">2.2.2.3</span> settings.json を編集する</h4>
+<p>上で pull した Docker image からコンテナを立ち上げ、そのコンテナの中でコンパイルするように、LaTeX Workshop に指示したい。
+そこで VSCode の settings を変更する。</p>
+<p>VSCode の左下の歯車のアイコンを選択し、<code>Settings</code> を選択する。</p>
+<p><img src="images/vscode-geer.png" /><!-- --></p>
+<p>そして右上に現れる書類のようなアイコンを選択し、<code>settings.json</code> ファイルを開く。</p>
+<p><img src="images/vscode-json.png" /><!-- --></p>
+<p><code>settings.json</code> に、以下を書き加えよう。</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb12-1"><a href="writing-paper.html#cb12-1"></a><span class="fu">{</span></span>
+<span id="cb12-2"><a href="writing-paper.html#cb12-2"></a>  <span class="dt">&quot;latex-workshop.latex.clean.fileTypes&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb12-3"><a href="writing-paper.html#cb12-3"></a>    <span class="st">&quot;*.aux&quot;</span><span class="ot">,</span> <span class="st">&quot;*.bbl&quot;</span><span class="ot">,</span> <span class="st">&quot;*.blg&quot;</span><span class="ot">,</span> <span class="st">&quot;*.idx&quot;</span><span class="ot">,</span> <span class="st">&quot;*.ind&quot;</span><span class="ot">,</span> <span class="st">&quot;*.lof&quot;</span><span class="ot">,</span> <span class="st">&quot;*.lot&quot;</span><span class="ot">,</span> <span class="st">&quot;*.out&quot;</span><span class="ot">,</span> <span class="st">&quot;*.toc&quot;</span><span class="ot">,</span> <span class="st">&quot;*.acn&quot;</span><span class="ot">,</span> <span class="st">&quot;*.acr&quot;</span><span class="ot">,</span> <span class="st">&quot;*.alg&quot;</span><span class="ot">,</span> <span class="st">&quot;*.glg&quot;</span><span class="ot">,</span> <span class="st">&quot;*.glo&quot;</span><span class="ot">,</span> <span class="st">&quot;*.gls&quot;</span><span class="ot">,</span> <span class="st">&quot;*.ist&quot;</span><span class="ot">,</span> <span class="st">&quot;*.fls&quot;</span><span class="ot">,</span> <span class="st">&quot;*.log&quot;</span><span class="ot">,</span> <span class="st">&quot;*.fdb_latexmk&quot;</span><span class="ot">,</span> <span class="st">&quot;*.synctex.gz&quot;</span><span class="ot">,</span></span>
+<span id="cb12-4"><a href="writing-paper.html#cb12-4"></a>    <span class="er">//</span> <span class="er">for</span> <span class="er">Beamer</span> <span class="er">files</span></span>
+<span id="cb12-5"><a href="writing-paper.html#cb12-5"></a>    <span class="st">&quot;_minted*&quot;</span><span class="ot">,</span> <span class="st">&quot;*.nav&quot;</span><span class="ot">,</span> <span class="st">&quot;*.snm&quot;</span><span class="ot">,</span> <span class="st">&quot;*.vrb&quot;</span><span class="ot">,</span></span>
+<span id="cb12-6"><a href="writing-paper.html#cb12-6"></a>  <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb12-7"><a href="writing-paper.html#cb12-7"></a>  </span>
+<span id="cb12-8"><a href="writing-paper.html#cb12-8"></a>  <span class="dt">&quot;latex-workshop.latex.autoClean.run&quot;</span><span class="fu">:</span> <span class="st">&quot;onBuilt&quot;</span><span class="fu">,</span></span>
+<span id="cb12-9"><a href="writing-paper.html#cb12-9"></a>  </span>
+<span id="cb12-10"><a href="writing-paper.html#cb12-10"></a>  <span class="dt">&quot;latex-workshop.latex.recipes&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb12-11"><a href="writing-paper.html#cb12-11"></a>    <span class="fu">{</span></span>
+<span id="cb12-12"><a href="writing-paper.html#cb12-12"></a>      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;compile&quot;</span><span class="fu">,</span></span>
+<span id="cb12-13"><a href="writing-paper.html#cb12-13"></a>      <span class="dt">&quot;tools&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb12-14"><a href="writing-paper.html#cb12-14"></a>        <span class="st">&quot;tex2pdf&quot;</span></span>
+<span id="cb12-15"><a href="writing-paper.html#cb12-15"></a>      <span class="ot">]</span></span>
+<span id="cb12-16"><a href="writing-paper.html#cb12-16"></a>    <span class="fu">}</span></span>
+<span id="cb12-17"><a href="writing-paper.html#cb12-17"></a>  <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb12-18"><a href="writing-paper.html#cb12-18"></a>  </span>
+<span id="cb12-19"><a href="writing-paper.html#cb12-19"></a>  <span class="dt">&quot;latex-workshop.latex.tools&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb12-20"><a href="writing-paper.html#cb12-20"></a>    <span class="fu">{</span></span>
+<span id="cb12-21"><a href="writing-paper.html#cb12-21"></a>      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;tex2pdf&quot;</span><span class="fu">,</span></span>
+<span id="cb12-22"><a href="writing-paper.html#cb12-22"></a>      <span class="dt">&quot;command&quot;</span><span class="fu">:</span> <span class="st">&quot;docker&quot;</span><span class="fu">,</span></span>
+<span id="cb12-23"><a href="writing-paper.html#cb12-23"></a>      <span class="dt">&quot;args&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb12-24"><a href="writing-paper.html#cb12-24"></a>        <span class="st">&quot;run&quot;</span><span class="ot">,</span></span>
+<span id="cb12-25"><a href="writing-paper.html#cb12-25"></a>        <span class="st">&quot;--rm&quot;</span><span class="ot">,</span></span>
+<span id="cb12-26"><a href="writing-paper.html#cb12-26"></a>        <span class="st">&quot;-v&quot;</span><span class="ot">,</span></span>
+<span id="cb12-27"><a href="writing-paper.html#cb12-27"></a>        <span class="st">&quot;%DIR%:/usr/workdir&quot;</span><span class="ot">,</span></span>
+<span id="cb12-28"><a href="writing-paper.html#cb12-28"></a>        <span class="st">&quot;-w&quot;</span><span class="ot">,</span></span>
+<span id="cb12-29"><a href="writing-paper.html#cb12-29"></a>        <span class="st">&quot;/usr/workdir&quot;</span><span class="ot">,</span></span>
+<span id="cb12-30"><a href="writing-paper.html#cb12-30"></a>        <span class="st">&quot;ghcr.io/xu-cheng/texlive-full&quot;</span><span class="ot">,</span></span>
+<span id="cb12-31"><a href="writing-paper.html#cb12-31"></a>        <span class="st">&quot;latexmk&quot;</span><span class="ot">,</span></span>
+<span id="cb12-32"><a href="writing-paper.html#cb12-32"></a>        <span class="st">&quot;%DOCFILE_EXT%&quot;</span><span class="ot">,</span></span>
+<span id="cb12-33"><a href="writing-paper.html#cb12-33"></a>        <span class="st">&quot;-pdf&quot;</span></span>
+<span id="cb12-34"><a href="writing-paper.html#cb12-34"></a>      <span class="ot">]</span></span>
+<span id="cb12-35"><a href="writing-paper.html#cb12-35"></a>    <span class="fu">}</span></span>
+<span id="cb12-36"><a href="writing-paper.html#cb12-36"></a>  <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb12-37"><a href="writing-paper.html#cb12-37"></a>  </span>
+<span id="cb12-38"><a href="writing-paper.html#cb12-38"></a>  <span class="dt">&quot;latex-workshop.latex.autoBuild.run&quot;</span><span class="fu">:</span> <span class="st">&quot;onFileChange&quot;</span><span class="fu">,</span></span>
+<span id="cb12-39"><a href="writing-paper.html#cb12-39"></a>  </span>
+<span id="cb12-40"><a href="writing-paper.html#cb12-40"></a>  <span class="dt">&quot;latex-workshop.view.pdf.viewer&quot;</span><span class="fu">:</span> <span class="st">&quot;tab&quot;</span></span>
+<span id="cb12-41"><a href="writing-paper.html#cb12-41"></a><span class="fu">}</span></span></code></pre></div>
+<ul>
+<li><code>latex-workshop.latex.clean.fileTypes</code> は、コンパイルするときに生成される不必要なファイルのうち、削除したいものを指定している。そのアクションがコンパイルされるときに実行されるよう指示しているのが <code>"latex-workshop.latex.autoClean.run": "onBuilt"</code> である。</li>
+<li>使用するコンパイラーを <code>"latex-workshop.latex.recipes"</code> で書く。その定義を下の <code>"latex-workshop.latex.tools"</code> に書く。</li>
+<li>Docker に関してのコマンドの説明は省くが、コンパイルするときに <code>ghcr.io/xu-cheng/texlive-full</code> からコンテナを立ち上げ、<code>latexmk</code> コマンドを使い、current directory にある tex ファイルをコンパイルする。コンパイルが終わったら、コンテナを壊す。</li>
+<li><code>"latex-workshop.latex.autoBuild.run": "onFileChange"</code> は、tex ファイルに変更が加えられるごとに、コンパイルが行われるよう設定である。</li>
+</ul>
+<p>設定がうまくいけば、texファイルに変更が加えられるごとにコンパイルが行われ、作成された pdf ファイルを確認することができる。</p>
+<p><img src="images/vscode-view.png" /><!-- --></p>
+
+</div>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>WordファイルもGitでバージョン管理することは可能であるが、前回と比較してどの部分に変更を加えたかという差分を表示することができない。
+Wordファイルなどの<strong>バイナリファイル (binary file)</strong> は、Git での管理にはあまり向いていない。<a href="writing-paper.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p><code>origin/HEAD</code>
+は、リモートリポジトリ <code>origin</code> をクローンした時にダウンロードされるコミットの位置を表す。
+通常 <code>origin/master</code> と同じ位置を指す。<a href="writing-paper.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>Setting により、default branch は変更することが可能である。<a href="writing-paper.html#fnref3" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="useful-resources.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="continuous-integration.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
