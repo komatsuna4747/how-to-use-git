@@ -26,6 +26,9 @@ jobs:
           path: _bookdown_files
           key: bookdown-${{ hashFiles('**/*Rmd') }}
           restore-keys: bookdown-
+          
+      - name: Install bookdown
+        run: Rscript -e "install.packages('bookdown')"
 
       - name: Build site
         run: Rscript -e 'bookdown::render_book(quiet = TRUE)'
