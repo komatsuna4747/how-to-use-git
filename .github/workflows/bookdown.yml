@@ -3,6 +3,8 @@
 # Source: https://github.com/r-lib/actions/blob/master/examples/bookdown.yaml
 on:
   push:
+    branches:
+      - main
 
 name: bookdown
 
