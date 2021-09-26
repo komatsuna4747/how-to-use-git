@@ -369,14 +369,84 @@ Overleaf を用いて共同で執筆を行う場合、上記の問題をどう�
 </ul>
 <p>などが挙げられる。</p>
 <p>Visual Studio Code、略して VSCode はエディタの1つであり、数多くの拡張機能によって好みの開発環境を容易に構築することが可能である。</p>
-<p>VSCode と Docker を組み合わせて LaTeX の環境構築を行う方法は、検索すれば多数ヒットする。</p>
+<p>VSCode と Docker を組み合わせて LaTeX の環境構築を行う方法は、検索すれば多数ヒットする。
+それらを参考にして、ここでは VSCode + Docker + LaTeX の1つの方法を紹介する。
+Docker のインストール、VSCode のダウンロードは省略する (To do: 将来追記しておく)。</p>
+<p>[To do: Docker + LaTeX の概念図を作って入れる]</p>
+<div id="vscode-で拡張機能latex-workshopをインストールする" class="section level4">
+<h4><span class="header-section-number">2.2.2.1</span> VSCode で拡張機能「LaTeX Workshop」をインストールする。</h4>
+<p>LaTeX Workshop は、VSCode で LaTeX を扱う上で便利な拡張機能である。</p>
+<p>VSCode の左側にあるブロックのようなアイコンをクリックし、LaTeX Workshop と検索窓に入れる。
+LaTeX Workshop が見つかるはずなので、それをインストールする。</p>
+<p><img src="images/vscode-latex-workshop.png" width="686" /></p>
+</div>
+<div id="latex-が使える-docker-イメージをプルする" class="section level4">
+<h4><span class="header-section-number">2.2.2.2</span> LaTeX が使える Docker イメージをプルする</h4>
+<p>LaTeX Workshop は、LaTeX の環境構築が終わっていることを前提とした拡張機能であるため、LaTeX の環境構築を行う必要がある。
+そこで、LaTeX が使えるコンテナを起動する Docker image を手元に準備する。</p>
+<p>Dockerfile を書いて from scratch に作成してもよいが、こうしたイメージはすでに世の偉人たちが作成し使えるようにしてある。
+ここでは <code>ghcr.io/xu-cheng/texlive-full:latest</code> という Docker image を pull して使用する。日本語も使用したい場合は、<code>paperist/alpine-texlive-ja</code> が良いだろう。</p>
+<pre class="shell"><code>docker pull ghcr.io/xu-cheng/texlive-full:latest</code></pre>
+</div>
+<div id="settings.json-を編集する" class="section level4">
+<h4><span class="header-section-number">2.2.2.3</span> settings.json を編集する</h4>
+<p>上で pull した Docker image からコンテナを立ち上げ、そのコンテナの中でコンパイルするように、LaTeX Workshop に指示したい。
+そこで VSCode の settings を変更する。</p>
+<p>VSCode の左下の歯車のアイコンを選択し、<code>Settings</code> を選択する。</p>
+<p><img src="images/vscode-geer.png" width="131" /></p>
+<p>そして右上に現れる書類のようなアイコンを選択し、<code>settings.json</code> ファイルを開く。</p>
+<p><img src="images/vscode-json.png" width="144" /></p>
+<p><code>settings.json</code> に、以下を書き加えよう。</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb12-1"><a href="writing-paper.html#cb12-1"></a><span class="fu">{</span></span>
+<span id="cb12-2"><a href="writing-paper.html#cb12-2"></a>  <span class="dt">&quot;latex-workshop.latex.clean.fileTypes&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb12-3"><a href="writing-paper.html#cb12-3"></a>    <span class="st">&quot;*.aux&quot;</span><span class="ot">,</span> <span class="st">&quot;*.bbl&quot;</span><span class="ot">,</span> <span class="st">&quot;*.blg&quot;</span><span class="ot">,</span> <span class="st">&quot;*.idx&quot;</span><span class="ot">,</span> <span class="st">&quot;*.ind&quot;</span><span class="ot">,</span> <span class="st">&quot;*.lof&quot;</span><span class="ot">,</span> <span class="st">&quot;*.lot&quot;</span><span class="ot">,</span> <span class="st">&quot;*.out&quot;</span><span class="ot">,</span> <span class="st">&quot;*.toc&quot;</span><span class="ot">,</span> <span class="st">&quot;*.acn&quot;</span><span class="ot">,</span> <span class="st">&quot;*.acr&quot;</span><span class="ot">,</span> <span class="st">&quot;*.alg&quot;</span><span class="ot">,</span> <span class="st">&quot;*.glg&quot;</span><span class="ot">,</span> <span class="st">&quot;*.glo&quot;</span><span class="ot">,</span> <span class="st">&quot;*.gls&quot;</span><span class="ot">,</span> <span class="st">&quot;*.ist&quot;</span><span class="ot">,</span> <span class="st">&quot;*.fls&quot;</span><span class="ot">,</span> <span class="st">&quot;*.log&quot;</span><span class="ot">,</span> <span class="st">&quot;*.fdb_latexmk&quot;</span><span class="ot">,</span> <span class="st">&quot;*.synctex.gz&quot;</span><span class="ot">,</span></span>
+<span id="cb12-4"><a href="writing-paper.html#cb12-4"></a>    <span class="er">//</span> <span class="er">for</span> <span class="er">Beamer</span> <span class="er">files</span></span>
+<span id="cb12-5"><a href="writing-paper.html#cb12-5"></a>    <span class="st">&quot;_minted*&quot;</span><span class="ot">,</span> <span class="st">&quot;*.nav&quot;</span><span class="ot">,</span> <span class="st">&quot;*.snm&quot;</span><span class="ot">,</span> <span class="st">&quot;*.vrb&quot;</span><span class="ot">,</span></span>
+<span id="cb12-6"><a href="writing-paper.html#cb12-6"></a>  <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb12-7"><a href="writing-paper.html#cb12-7"></a>  </span>
+<span id="cb12-8"><a href="writing-paper.html#cb12-8"></a>  <span class="dt">&quot;latex-workshop.latex.autoClean.run&quot;</span><span class="fu">:</span> <span class="st">&quot;onBuilt&quot;</span><span class="fu">,</span></span>
+<span id="cb12-9"><a href="writing-paper.html#cb12-9"></a>  </span>
+<span id="cb12-10"><a href="writing-paper.html#cb12-10"></a>  <span class="dt">&quot;latex-workshop.latex.recipes&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb12-11"><a href="writing-paper.html#cb12-11"></a>    <span class="fu">{</span></span>
+<span id="cb12-12"><a href="writing-paper.html#cb12-12"></a>      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;compile&quot;</span><span class="fu">,</span></span>
+<span id="cb12-13"><a href="writing-paper.html#cb12-13"></a>      <span class="dt">&quot;tools&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb12-14"><a href="writing-paper.html#cb12-14"></a>        <span class="st">&quot;tex2pdf&quot;</span></span>
+<span id="cb12-15"><a href="writing-paper.html#cb12-15"></a>      <span class="ot">]</span></span>
+<span id="cb12-16"><a href="writing-paper.html#cb12-16"></a>    <span class="fu">}</span></span>
+<span id="cb12-17"><a href="writing-paper.html#cb12-17"></a>  <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb12-18"><a href="writing-paper.html#cb12-18"></a>  </span>
+<span id="cb12-19"><a href="writing-paper.html#cb12-19"></a>  <span class="dt">&quot;latex-workshop.latex.tools&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb12-20"><a href="writing-paper.html#cb12-20"></a>    <span class="fu">{</span></span>
+<span id="cb12-21"><a href="writing-paper.html#cb12-21"></a>      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;tex2pdf&quot;</span><span class="fu">,</span></span>
+<span id="cb12-22"><a href="writing-paper.html#cb12-22"></a>      <span class="dt">&quot;command&quot;</span><span class="fu">:</span> <span class="st">&quot;docker&quot;</span><span class="fu">,</span></span>
+<span id="cb12-23"><a href="writing-paper.html#cb12-23"></a>      <span class="dt">&quot;args&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb12-24"><a href="writing-paper.html#cb12-24"></a>        <span class="st">&quot;run&quot;</span><span class="ot">,</span></span>
+<span id="cb12-25"><a href="writing-paper.html#cb12-25"></a>        <span class="st">&quot;--rm&quot;</span><span class="ot">,</span></span>
+<span id="cb12-26"><a href="writing-paper.html#cb12-26"></a>        <span class="st">&quot;-v&quot;</span><span class="ot">,</span></span>
+<span id="cb12-27"><a href="writing-paper.html#cb12-27"></a>        <span class="st">&quot;%DIR%:/usr/workdir&quot;</span><span class="ot">,</span></span>
+<span id="cb12-28"><a href="writing-paper.html#cb12-28"></a>        <span class="st">&quot;-w&quot;</span><span class="ot">,</span></span>
+<span id="cb12-29"><a href="writing-paper.html#cb12-29"></a>        <span class="st">&quot;/usr/workdir&quot;</span><span class="ot">,</span></span>
+<span id="cb12-30"><a href="writing-paper.html#cb12-30"></a>        <span class="st">&quot;ghcr.io/xu-cheng/texlive-full&quot;</span><span class="ot">,</span></span>
+<span id="cb12-31"><a href="writing-paper.html#cb12-31"></a>        <span class="st">&quot;latexmk&quot;</span><span class="ot">,</span></span>
+<span id="cb12-32"><a href="writing-paper.html#cb12-32"></a>        <span class="st">&quot;%DOCFILE_EXT%&quot;</span><span class="ot">,</span></span>
+<span id="cb12-33"><a href="writing-paper.html#cb12-33"></a>        <span class="st">&quot;-pdf&quot;</span></span>
+<span id="cb12-34"><a href="writing-paper.html#cb12-34"></a>      <span class="ot">]</span></span>
+<span id="cb12-35"><a href="writing-paper.html#cb12-35"></a>    <span class="fu">}</span></span>
+<span id="cb12-36"><a href="writing-paper.html#cb12-36"></a>  <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb12-37"><a href="writing-paper.html#cb12-37"></a>  </span>
+<span id="cb12-38"><a href="writing-paper.html#cb12-38"></a>  <span class="dt">&quot;latex-workshop.latex.autoBuild.run&quot;</span><span class="fu">:</span> <span class="st">&quot;onFileChange&quot;</span><span class="fu">,</span></span>
+<span id="cb12-39"><a href="writing-paper.html#cb12-39"></a>  </span>
+<span id="cb12-40"><a href="writing-paper.html#cb12-40"></a>  <span class="dt">&quot;latex-workshop.view.pdf.viewer&quot;</span><span class="fu">:</span> <span class="st">&quot;tab&quot;</span></span>
+<span id="cb12-41"><a href="writing-paper.html#cb12-41"></a><span class="fu">}</span></span></code></pre></div>
 <ul>
-<li>爆速で日本語LaTeX執筆環境を用意する
-<ul>
-<li><a href="https://korosuke613.hatenablog.com/entry/2019/06/24/171246" class="uri">https://korosuke613.hatenablog.com/entry/2019/06/24/171246</a></li>
-</ul></li>
+<li><code>latex-workshop.latex.clean.fileTypes</code> は、コンパイルするときに生成される不必要なファイルのうち、削除したいものを指定している。そのアクションがコンパイルされるときに実行されるよう指示しているのが <code>"latex-workshop.latex.autoClean.run": "onBuilt"</code> である。</li>
+<li>使用するコンパイラーを <code>"latex-workshop.latex.recipes"</code> で書く。その定義を下の <code>"latex-workshop.latex.tools"</code> に書く。</li>
+<li>Docker に関してのコマンドの説明は省くが、コンパイルするときに <code>ghcr.io/xu-cheng/texlive-full</code> からコンテナを立ち上げ、<code>latexmk</code> コマンドを使い、current directory にある tex ファイルをコンパイルする。コンパイルが終わったら、コンテナを壊す。</li>
+<li><code>"latex-workshop.latex.autoBuild.run": "onFileChange"</code> は、tex ファイルに変更が加えられるごとに、コンパイルが行われるよう設定である。</li>
 </ul>
-<p>To do: この続きを書く。</p>
+<p>設定がうまくいけば、texファイルに変更が加えられるごとにコンパイルが行われ、作成された pdf ファイルを確認することができる。</p>
+<p><img src="images/vscode-view.png" width="1006" /></p>
+</div>
 </div>
 </div>
 <div id="継続的インテグレーションによりgithub-上で自動的にコンパイルする" class="section level2">
@@ -394,33 +464,33 @@ Overleaf を用いて共同で執筆を行う場合、上記の問題をどう�
 <p><img src="images/github-actions.png" width="1383" /></p>
 <p>ひとまず <code>komatsuna4747/gitpractice/.github/workflow</code> に以下のような <code>main.yaml</code>を作成した。
 今回のワークフローの自動化では、<a href="https://github.com/xu-cheng/latex-action">こちら</a>を利用している<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>。</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb11-1"><a href="writing-paper.html#cb11-1"></a><span class="co"># This is a basic workflow to help you get started with Actions</span></span>
-<span id="cb11-2"><a href="writing-paper.html#cb11-2"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Build LaTeX document</span></span>
-<span id="cb11-3"><a href="writing-paper.html#cb11-3"></a></span>
-<span id="cb11-4"><a href="writing-paper.html#cb11-4"></a><span class="co"># Controls when the workflow will run</span></span>
-<span id="cb11-5"><a href="writing-paper.html#cb11-5"></a><span class="fu">on</span><span class="kw">:</span></span>
-<span id="cb11-6"><a href="writing-paper.html#cb11-6"></a><span class="at">  </span><span class="fu">push</span><span class="kw">:</span></span>
-<span id="cb11-7"><a href="writing-paper.html#cb11-7"></a><span class="at">    </span><span class="fu">paths</span><span class="kw">:</span></span>
-<span id="cb11-8"><a href="writing-paper.html#cb11-8"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&#39;papers/report.tex&#39;</span></span>
-<span id="cb11-9"><a href="writing-paper.html#cb11-9"></a></span>
-<span id="cb11-10"><a href="writing-paper.html#cb11-10"></a><span class="fu">jobs</span><span class="kw">:</span></span>
-<span id="cb11-11"><a href="writing-paper.html#cb11-11"></a><span class="at">  </span><span class="fu">build_latex</span><span class="kw">:</span></span>
-<span id="cb11-12"><a href="writing-paper.html#cb11-12"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
-<span id="cb11-13"><a href="writing-paper.html#cb11-13"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
-<span id="cb11-14"><a href="writing-paper.html#cb11-14"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Set up Git repository</span></span>
-<span id="cb11-15"><a href="writing-paper.html#cb11-15"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v2</span></span>
-<span id="cb11-16"><a href="writing-paper.html#cb11-16"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Compile LaTeX document</span></span>
-<span id="cb11-17"><a href="writing-paper.html#cb11-17"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> xu-cheng/latex-action@v2</span></span>
-<span id="cb11-18"><a href="writing-paper.html#cb11-18"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
-<span id="cb11-19"><a href="writing-paper.html#cb11-19"></a><span class="at">          </span><span class="fu">working_directory</span><span class="kw">:</span><span class="at"> papers</span></span>
-<span id="cb11-20"><a href="writing-paper.html#cb11-20"></a><span class="at">          </span><span class="fu">root_file</span><span class="kw">:</span><span class="at"> report.tex</span></span>
-<span id="cb11-21"><a href="writing-paper.html#cb11-21"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Copy PDF file</span></span>
-<span id="cb11-22"><a href="writing-paper.html#cb11-22"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> mkdir docs &amp;&amp; cp papers/*.pdf docs/</span></span>
-<span id="cb11-23"><a href="writing-paper.html#cb11-23"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Deploy pages</span></span>
-<span id="cb11-24"><a href="writing-paper.html#cb11-24"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> peaceiris/actions-gh-pages@v3</span></span>
-<span id="cb11-25"><a href="writing-paper.html#cb11-25"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
-<span id="cb11-26"><a href="writing-paper.html#cb11-26"></a><span class="at">          </span><span class="fu">github_token</span><span class="kw">:</span><span class="at"> ${{ secrets.GITHUB_TOKEN }}</span></span>
-<span id="cb11-27"><a href="writing-paper.html#cb11-27"></a><span class="at">          </span><span class="fu">publish_dir</span><span class="kw">:</span><span class="at"> ./docs</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb13-1"><a href="writing-paper.html#cb13-1"></a><span class="co"># This is a basic workflow to help you get started with Actions</span></span>
+<span id="cb13-2"><a href="writing-paper.html#cb13-2"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Build LaTeX document</span></span>
+<span id="cb13-3"><a href="writing-paper.html#cb13-3"></a></span>
+<span id="cb13-4"><a href="writing-paper.html#cb13-4"></a><span class="co"># Controls when the workflow will run</span></span>
+<span id="cb13-5"><a href="writing-paper.html#cb13-5"></a><span class="fu">on</span><span class="kw">:</span></span>
+<span id="cb13-6"><a href="writing-paper.html#cb13-6"></a><span class="at">  </span><span class="fu">push</span><span class="kw">:</span></span>
+<span id="cb13-7"><a href="writing-paper.html#cb13-7"></a><span class="at">    </span><span class="fu">paths</span><span class="kw">:</span></span>
+<span id="cb13-8"><a href="writing-paper.html#cb13-8"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&#39;papers/report.tex&#39;</span></span>
+<span id="cb13-9"><a href="writing-paper.html#cb13-9"></a></span>
+<span id="cb13-10"><a href="writing-paper.html#cb13-10"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb13-11"><a href="writing-paper.html#cb13-11"></a><span class="at">  </span><span class="fu">build_latex</span><span class="kw">:</span></span>
+<span id="cb13-12"><a href="writing-paper.html#cb13-12"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb13-13"><a href="writing-paper.html#cb13-13"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb13-14"><a href="writing-paper.html#cb13-14"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Set up Git repository</span></span>
+<span id="cb13-15"><a href="writing-paper.html#cb13-15"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v2</span></span>
+<span id="cb13-16"><a href="writing-paper.html#cb13-16"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Compile LaTeX document</span></span>
+<span id="cb13-17"><a href="writing-paper.html#cb13-17"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> xu-cheng/latex-action@v2</span></span>
+<span id="cb13-18"><a href="writing-paper.html#cb13-18"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb13-19"><a href="writing-paper.html#cb13-19"></a><span class="at">          </span><span class="fu">working_directory</span><span class="kw">:</span><span class="at"> papers</span></span>
+<span id="cb13-20"><a href="writing-paper.html#cb13-20"></a><span class="at">          </span><span class="fu">root_file</span><span class="kw">:</span><span class="at"> report.tex</span></span>
+<span id="cb13-21"><a href="writing-paper.html#cb13-21"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Copy PDF file</span></span>
+<span id="cb13-22"><a href="writing-paper.html#cb13-22"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> mkdir docs &amp;&amp; cp papers/*.pdf docs/</span></span>
+<span id="cb13-23"><a href="writing-paper.html#cb13-23"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Deploy pages</span></span>
+<span id="cb13-24"><a href="writing-paper.html#cb13-24"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> peaceiris/actions-gh-pages@v3</span></span>
+<span id="cb13-25"><a href="writing-paper.html#cb13-25"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb13-26"><a href="writing-paper.html#cb13-26"></a><span class="at">          </span><span class="fu">github_token</span><span class="kw">:</span><span class="at"> ${{ secrets.GITHUB_TOKEN }}</span></span>
+<span id="cb13-27"><a href="writing-paper.html#cb13-27"></a><span class="at">          </span><span class="fu">publish_dir</span><span class="kw">:</span><span class="at"> ./docs</span></span></code></pre></div>
 <p>To do: この詳細を書く。若干微調整している。</p>
 <p>書かれてある内容の詳細は省くが、このファイルを容易することで、変更が加えられた tex ファイルが GitHub のリポジトリにプッシュされるごとに</p>
 <ul>
@@ -431,20 +501,20 @@ Overleaf を用いて共同で執筆を行う場合、上記の問題をどう�
 さらに、変更が加えられた tex ファイルがプッシュされるごとに、<code>gh-pages</code> の pdf も更新されるので、tex のファイルのバージョンと pdf のバージョンが常に最新版でリンクするようになるわけである。</p>
 <p>実際にどのように動くのかを見てみよう。</p>
 <p>まず、tex ファイルに以下のような変更を加えてコミットし、プッシュする。</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode diff"><code class="sourceCode diff"><span id="cb12-1"><a href="writing-paper.html#cb12-1"></a>$ git diff</span>
-<span id="cb12-2"><a href="writing-paper.html#cb12-2"></a><span class="kw">diff --git a/papers/report.tex b/papers/report.tex</span></span>
-<span id="cb12-3"><a href="writing-paper.html#cb12-3"></a>index 117cbb2..327440f 100644</span>
-<span id="cb12-4"><a href="writing-paper.html#cb12-4"></a><span class="dt">--- a/papers/report.tex</span></span>
-<span id="cb12-5"><a href="writing-paper.html#cb12-5"></a><span class="dt">+++ b/papers/report.tex</span></span>
-<span id="cb12-6"><a href="writing-paper.html#cb12-6"></a><span class="dt">@@ -17,7 +17,7 @@</span></span>
-<span id="cb12-7"><a href="writing-paper.html#cb12-7"></a> </span>
-<span id="cb12-8"><a href="writing-paper.html#cb12-8"></a> \section{Introduction}</span>
-<span id="cb12-9"><a href="writing-paper.html#cb12-9"></a> </span>
-<span id="cb12-10"><a href="writing-paper.html#cb12-10"></a><span class="st">-\citet{knittel2018working} is a good reference for data management issues in empirical research projects.</span></span>
-<span id="cb12-11"><a href="writing-paper.html#cb12-11"></a><span class="va">+\citet{knittel2018working} is a good reference for empirical research projects.</span></span>
-<span id="cb12-12"><a href="writing-paper.html#cb12-12"></a> </span>
-<span id="cb12-13"><a href="writing-paper.html#cb12-13"></a> \bibliography{report}</span>
-<span id="cb12-14"><a href="writing-paper.html#cb12-14"></a> \bibliographystyle{aer}</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode diff"><code class="sourceCode diff"><span id="cb14-1"><a href="writing-paper.html#cb14-1"></a>$ git diff</span>
+<span id="cb14-2"><a href="writing-paper.html#cb14-2"></a><span class="kw">diff --git a/papers/report.tex b/papers/report.tex</span></span>
+<span id="cb14-3"><a href="writing-paper.html#cb14-3"></a>index 117cbb2..327440f 100644</span>
+<span id="cb14-4"><a href="writing-paper.html#cb14-4"></a><span class="dt">--- a/papers/report.tex</span></span>
+<span id="cb14-5"><a href="writing-paper.html#cb14-5"></a><span class="dt">+++ b/papers/report.tex</span></span>
+<span id="cb14-6"><a href="writing-paper.html#cb14-6"></a><span class="dt">@@ -17,7 +17,7 @@</span></span>
+<span id="cb14-7"><a href="writing-paper.html#cb14-7"></a> </span>
+<span id="cb14-8"><a href="writing-paper.html#cb14-8"></a> \section{Introduction}</span>
+<span id="cb14-9"><a href="writing-paper.html#cb14-9"></a> </span>
+<span id="cb14-10"><a href="writing-paper.html#cb14-10"></a><span class="st">-\citet{knittel2018working} is a good reference for data management issues in empirical research projects.</span></span>
+<span id="cb14-11"><a href="writing-paper.html#cb14-11"></a><span class="va">+\citet{knittel2018working} is a good reference for empirical research projects.</span></span>
+<span id="cb14-12"><a href="writing-paper.html#cb14-12"></a> </span>
+<span id="cb14-13"><a href="writing-paper.html#cb14-13"></a> \bibliography{report}</span>
+<span id="cb14-14"><a href="writing-paper.html#cb14-14"></a> \bibliographystyle{aer}</span></code></pre></div>
 <pre class="shell"><code>$ git add -u
 
 $ git status 
