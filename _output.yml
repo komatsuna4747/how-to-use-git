@@ -1,3 +1,7 @@
 bookdown::gitbook:
   css: style.css
   split_by: "rmd"
+  config:
+    sharing:
+      github: yes
+      facebook: no

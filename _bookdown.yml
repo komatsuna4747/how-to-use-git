@@ -1,4 +1,5 @@
 book_filename: "howtogit"
+repo: https://github.com/komatsuna4747/how-to-use-git
 output_dir: "docs"
 delete_merged_file: true
 rmd_files:
@@ -7,3 +8,8 @@ rmd_files:
   - writing-paper.Rmd
   - continuous-integration.Rmd
   - branch-strategy.Rmd
+sharing:
+  github: yes
+  facebook: no
+  twitter: yes
+  all: no
