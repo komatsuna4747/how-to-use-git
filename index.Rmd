@@ -13,4 +13,4 @@ Git/GitHubの使い方のチュートリアルの紹介や、研究プロジェ�
 こちらのページの内容は発展途上であり、筆者自身試行錯誤を重ねながら今後も継続的にアップデートを加えていきます。
 ご意見・ご要望などありましたら歓迎いたします。
 
-この bookdown のソースコードは[こちら](https://github.com/komatsuna4747/how-to-use-git)。
+この bookdown のソースコードは[こちら](https://github.com/komatsuna4747/how-to-use-git)。Issuesの投稿、Pull Requestを歓迎します。
